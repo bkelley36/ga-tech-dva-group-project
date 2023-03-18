@@ -45,7 +45,7 @@ export default function HomePageHeader() {
           <Image
             src={metHeroImage}
             className='h-full w-full object-cover'
-            alt='A picture of white cats'
+            alt='MET Hero Image'
             width={1920}
             height={1285}
             placeholder='blur'
@@ -71,10 +71,10 @@ export default function HomePageHeader() {
       {/* Overlapping cards */}
       <section
         className='relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-32 lg:px-8'
-        aria-labelledby='contact-heading'
+        aria-labelledby='pages-heading'
       >
-        <h2 className='sr-only' id='contact-heading'>
-          Contact us
+        <h2 className='sr-only' id='pages-heading'>
+          Pages
         </h2>
         <div className='grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8'>
           {pages.map((page) => (
