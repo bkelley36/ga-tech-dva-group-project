@@ -1,11 +1,15 @@
+import Image from 'next/image'
+
 import Layout from '@/components/layout/Layout'
+
+import brandonImage from '../../public/images/brandon.jpg'
+
 const people = [
   {
-    name: 'Leonard Krasner',
-    role: 'Senior Designer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    bio: 'Quia illum aut in beatae. Possimus dolores aliquid accusantium aut in ut non assumenda. Enim iusto molestias aut deleniti eos aliquid magnam molestiae. At et non possimus ab. Magni labore molestiae nulla qui.',
+    name: 'Brandon',
+    role: 'Cleveland, OH',
+    image: brandonImage,
+    bio: 'Remote Software Engineer in the Insurance Industry with web and mobile development experience. Graduated from Cleveland State University’s college of Engineering with a Bachelor’s of Science in Computer Science. Currently pursing a Master’s in Analytics at Georgia Tech. ',
   },
   // More people...
 ]
@@ -17,12 +21,11 @@ export default function Team() {
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl sm:text-center'>
             <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-              Meet our leadership
+              Meet our team
             </h2>
             <p className='mt-6 text-lg leading-8 text-gray-600'>
-              We’re a dynamic group of individuals who are passionate about what
-              we do and dedicated to delivering the best results for our
-              clients.
+              We’re a group of Georgia Tech. students working together for our
+              semester project
             </p>
           </div>
           <ul
@@ -31,10 +34,12 @@ export default function Team() {
           >
             {people.map((person) => (
               <li key={person.name} className='flex flex-col gap-6 xl:flex-row'>
-                <img
+                <Image
                   className='aspect-[4/5] w-52 flex-none rounded-2xl object-cover'
-                  src={person.imageUrl}
-                  alt=''
+                  src={person.image}
+                  width={208}
+                  height={260}
+                  alt={`${person.name} image`}
                 />
                 <div className='flex-auto'>
                   <h3 className='text-lg font-semibold leading-8 tracking-tight text-gray-900'>

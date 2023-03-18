@@ -1,37 +1,31 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import {
-  BookmarkSquareIcon,
-  BookOpenIcon,
-  QueueListIcon,
-  RssIcon,
+  DocumentIcon,
+  MagnifyingGlassIcon,
+  UserGroupIcon,
 } from '@heroicons/react/24/solid'
-// import Image from 'next/image'
-// TODO implement Next Image instead of img
 
-const links = [
+const pages = [
   {
-    name: 'Documentation',
-    href: '#',
-    description: 'Learn how to integrate our tools with your app.',
-    icon: BookOpenIcon,
+    name: 'Tool',
+    href: '/#tool',
+    description:
+      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+    icon: MagnifyingGlassIcon,
   },
   {
-    name: 'API Reference',
-    href: '#',
-    description: 'A complete API reference for our libraries.',
-    icon: QueueListIcon,
+    name: 'Proposal',
+    href: '/proposal',
+    description:
+      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+    icon: DocumentIcon,
   },
   {
-    name: 'Guides',
-    href: '#',
-    description: 'Installation guides that cover popular setups.',
-    icon: BookmarkSquareIcon,
-  },
-  {
-    name: 'Blog',
-    href: '#',
-    description: 'Read our latest news and articles.',
-    icon: RssIcon,
+    name: 'Team',
+    href: '/team',
+    description:
+      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+    icon: UserGroupIcon,
   },
 ]
 const social = [
@@ -76,15 +70,22 @@ export default function NotFoundPage() {
   return (
     <div className='bg-white'>
       <main className='mx-auto w-full max-w-7xl px-6 pt-10 pb-16 sm:pb-24 lg:px-8'>
-        <img
-          className='mx-auto h-10 w-auto sm:h-12'
-          src='https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600'
-          alt='Your Company'
-        />
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          strokeWidth={1.5}
+          stroke='currentColor'
+          className='mx-auto h-10 w-auto stroke-rose-600 sm:h-12'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            d='M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z'
+          />
+        </svg>
         <div className='mx-auto mt-20 max-w-2xl text-center sm:mt-24'>
-          <p className='text-base font-semibold leading-8 text-indigo-600'>
-            404
-          </p>
+          <p className='text-base font-semibold leading-8 text-rose-600'>404</p>
           <h1 className='mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl'>
             This page does not exist
           </h1>
@@ -93,28 +94,28 @@ export default function NotFoundPage() {
           </p>
         </div>
         <div className='mx-auto mt-16 flow-root max-w-lg sm:mt-20'>
-          <h2 className='sr-only'>Popular pages</h2>
+          <h2 className='sr-only'>Website pages</h2>
           <ul
             role='list'
             className='-mt-6 divide-y divide-gray-900/5 border-b border-gray-900/5'
           >
-            {links.map((link, linkIdx) => (
-              <li key={linkIdx} className='relative flex gap-x-6 py-6'>
+            {pages.map((page, pageIndex) => (
+              <li key={pageIndex} className='relative flex gap-x-6 py-6'>
                 <div className='flex h-10 w-10 flex-none items-center justify-center rounded-lg shadow-sm ring-1 ring-gray-900/10'>
-                  <link.icon
-                    className='h-6 w-6 text-indigo-600'
+                  <page.icon
+                    className='h-6 w-6 text-rose-600'
                     aria-hidden='true'
                   />
                 </div>
                 <div className='flex-auto'>
                   <h3 className='text-sm font-semibold leading-6 text-gray-900'>
-                    <a href={link.href}>
+                    <a href={page.href}>
                       <span className='absolute inset-0' aria-hidden='true' />
-                      {link.name}
+                      {page.name}
                     </a>
                   </h3>
                   <p className='mt-2 text-sm leading-6 text-gray-600'>
-                    {link.description}
+                    {page.description}
                   </p>
                 </div>
                 <div className='flex-none self-center'>
@@ -126,15 +127,6 @@ export default function NotFoundPage() {
               </li>
             ))}
           </ul>
-          <div className='mt-10 flex justify-center'>
-            <a
-              href='#'
-              className='text-sm font-semibold leading-6 text-indigo-600'
-            >
-              <span aria-hidden='true'>&larr;</span>
-              Back to home
-            </a>
-          </div>
         </div>
       </main>
       <footer className='border-t border-gray-100 py-6 sm:py-10'>
