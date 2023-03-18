@@ -45,7 +45,7 @@ export default function HomePageHeader() {
           <Image
             src={metHeroImage}
             className='h-full w-full object-cover'
-            alt='A picture of white cats'
+            alt='MET hero image'
             width={1920}
             height={1285}
             placeholder='blur'
