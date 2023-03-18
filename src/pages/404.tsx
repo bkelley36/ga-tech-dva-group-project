@@ -8,7 +8,7 @@ import {
 const pages = [
   {
     name: 'Tool',
-    href: '/',
+    href: '/#tool',
     description:
       'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
     icon: MagnifyingGlassIcon,

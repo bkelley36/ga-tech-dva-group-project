@@ -98,7 +98,7 @@ export default function HomePageHeader() {
               </div>
               <div className='rounded-bl-2xl rounded-br-2xl bg-gray-50 p-6 md:px-8'>
                 <Link
-                  href={link.href}
+                  href={page.href}
                   className='text-base font-medium text-rose-700 hover:text-rose-600'
                   scroll={false}
                 >
