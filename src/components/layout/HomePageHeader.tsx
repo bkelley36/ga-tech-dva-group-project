@@ -9,7 +9,7 @@ import * as React from 'react'
 
 import metHeroImage from '../../../public/images/met-hero.jpg'
 
-const supportLinks = [
+const pages = [
   {
     name: 'Tool',
     href: '#tool',
@@ -77,23 +77,23 @@ export default function HomePageHeader() {
           Contact us
         </h2>
         <div className='grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8'>
-          {supportLinks.map((link) => (
+          {pages.map((page) => (
             <div
-              key={link.name}
+              key={page.name}
               className='flex flex-col rounded-2xl bg-white shadow-xl'
             >
               <div className='relative flex-1 px-6 pt-16 pb-8 md:px-8'>
                 <div className='absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-rose-600 p-5 shadow-lg'>
-                  <link.icon
+                  <page.icon
                     className='h-6 w-6 text-white'
                     aria-hidden='true'
                   />
                 </div>
                 <h3 className='text-xl font-medium text-gray-900'>
-                  {link.name}
+                  {page.name}
                 </h3>
                 <p className='mt-4 text-base text-gray-500'>
-                  {link.description}
+                  {page.description}
                 </p>
               </div>
               <div className='rounded-bl-2xl rounded-br-2xl bg-gray-50 p-6 md:px-8'>
@@ -102,7 +102,7 @@ export default function HomePageHeader() {
                   className='text-base font-medium text-rose-700 hover:text-rose-600'
                   scroll={false}
                 >
-                  {link.actionText}
+                  {page.actionText}
                   <span aria-hidden='true'> &rarr;</span>
                 </Link>
               </div>
