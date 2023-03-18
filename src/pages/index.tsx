@@ -15,7 +15,7 @@ export default function HomePage() {
     <Layout>
       <Seo templateTitle='Home' />
       <HomePageHeader></HomePageHeader>
-      <main>
+      <main id='tool'>
         <section className='bg-white'>
           <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
             <h1 className='mt-4'>GA DVA MET Project</h1>

@@ -1,31 +1,38 @@
 import {
-  LifebuoyIcon,
-  NewspaperIcon,
-  PhoneIcon,
+  DocumentIcon,
+  MagnifyingGlassIcon,
+  UserGroupIcon,
 } from '@heroicons/react/24/outline'
+import Image from 'next/image'
+import Link from 'next/link'
 import * as React from 'react'
+
+import metHeroImage from '../../../public/images/met-hero.jpg'
 
 const supportLinks = [
   {
-    name: 'Sales',
-    href: '#',
+    name: 'Tool',
+    href: '#tool',
+    actionText: 'Use the tool',
     description:
       'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
-    icon: PhoneIcon,
+    icon: MagnifyingGlassIcon,
   },
   {
-    name: 'Technical Support',
-    href: '#',
+    name: 'Proposal',
+    href: '/proposal',
+    actionText: 'Read the Proposal',
     description:
       'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
-    icon: LifebuoyIcon,
+    icon: DocumentIcon,
   },
   {
-    name: 'Media Inquiries',
-    href: '#',
+    name: 'Team',
+    href: '/team',
+    actionText: 'Meet the Team',
     description:
       'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
-    icon: NewspaperIcon,
+    icon: UserGroupIcon,
   },
 ]
 
@@ -35,19 +42,23 @@ export default function HomePageHeader() {
       {/* Header */}
       <div className='relative bg-gray-800 pb-32'>
         <div className='absolute inset-0'>
-          <img
+          <Image
+            src={metHeroImage}
             className='h-full w-full object-cover'
-            src='https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100'
-            alt=''
+            alt='A picture of white cats'
+            width={1920}
+            height={1285}
+            placeholder='blur'
+            priority
           />
           <div
-            className='absolute inset-0 bg-gray-800 mix-blend-multiply'
+            className='absolute inset-0 bg-gray-500 mix-blend-multiply'
             aria-hidden='true'
           />
         </div>
         <div className='relative mx-auto max-w-7xl py-24 px-6 sm:py-32 lg:px-8'>
           <h1 className='text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl'>
-            Support
+            MET Explorer
           </h1>
           <p className='mt-6 max-w-3xl text-xl text-gray-300'>
             Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate
@@ -72,7 +83,7 @@ export default function HomePageHeader() {
               className='flex flex-col rounded-2xl bg-white shadow-xl'
             >
               <div className='relative flex-1 px-6 pt-16 pb-8 md:px-8'>
-                <div className='absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-indigo-600 p-5 shadow-lg'>
+                <div className='absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-rose-600 p-5 shadow-lg'>
                   <link.icon
                     className='h-6 w-6 text-white'
                     aria-hidden='true'
@@ -86,12 +97,14 @@ export default function HomePageHeader() {
                 </p>
               </div>
               <div className='rounded-bl-2xl rounded-br-2xl bg-gray-50 p-6 md:px-8'>
-                <a
+                <Link
                   href={link.href}
-                  className='text-base font-medium text-indigo-700 hover:text-indigo-600'
+                  className='text-base font-medium text-rose-700 hover:text-rose-600'
+                  scroll={false}
                 >
-                  Contact us<span aria-hidden='true'> &rarr;</span>
-                </a>
+                  {link.actionText}
+                  <span aria-hidden='true'> &rarr;</span>
+                </Link>
               </div>
             </div>
           ))}
