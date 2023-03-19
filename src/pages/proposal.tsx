@@ -10,7 +10,7 @@ export default function Proposal() {
     <Layout>
       <div className='bg-white py-32 px-6 lg:px-8'>
         <div className='mx-auto max-w-3xl text-base leading-7 text-gray-700'>
-          <p className='text-base font-semibold leading-7 text-indigo-600'>
+          <p className='text-base font-semibold leading-7 text-rose-600'>
             Introducing
           </p>
           <h1 className='mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
@@ -34,7 +34,7 @@ export default function Proposal() {
             <ul role='list' className='mt-8 max-w-xl space-y-8 text-gray-600'>
               <li className='flex gap-x-3'>
                 <CheckCircleIcon
-                  className='mt-1 h-5 w-5 flex-none text-indigo-600'
+                  className='mt-1 h-5 w-5 flex-none text-rose-600'
                   aria-hidden='true'
                 />
                 <span>
@@ -48,7 +48,7 @@ export default function Proposal() {
               </li>
               <li className='flex gap-x-3'>
                 <CheckCircleIcon
-                  className='mt-1 h-5 w-5 flex-none text-indigo-600'
+                  className='mt-1 h-5 w-5 flex-none text-rose-600'
                   aria-hidden='true'
                 />
                 <span>
@@ -61,7 +61,7 @@ export default function Proposal() {
               </li>
               <li className='flex gap-x-3'>
                 <CheckCircleIcon
-                  className='mt-1 h-5 w-5 flex-none text-indigo-600'
+                  className='mt-1 h-5 w-5 flex-none text-rose-600'
                   aria-hidden='true'
                 />
                 <span>
@@ -91,7 +91,7 @@ export default function Proposal() {
               cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis
               ipsum eu a sed convallis diam.
             </p>
-            <figure className='mt-10 border-l border-indigo-600 pl-9'>
+            <figure className='mt-10 border-l border-rose-600 pl-9'>
               <blockquote className='font-semibold text-gray-900'>
                 <p>
                   “Vel ultricies morbi odio facilisi ultrices accumsan donec
