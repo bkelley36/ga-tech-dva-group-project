@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Layout from '@/components/layout/Layout'
 
 import brandonImage from '../../public/images/brandon.jpg'
+import ColeImage from '../../public/images/ColeAndBern.jpg'
 
 const people = [
   {
@@ -10,6 +11,13 @@ const people = [
     role: 'Cleveland, OH',
     image: brandonImage,
     bio: 'Remote Software Engineer in the Insurance Industry with web and mobile development experience. Graduated from Cleveland State University’s college of Engineering with a Bachelor’s of Science in Computer Science. Currently pursing a Master’s in Analytics at Georgia Tech. ',
+  },
+
+  {
+    name: 'Cole',
+    role: 'Pittsburgh, PA',
+    image: ColeImage,
+    bio: 'Data Analyst at a healthcare start up during the week and adeventuring vagabond on the weekends. Former Peace Corps volunteer in Mozambique and graduate of Michigan State University who is currently setting up shop in Pittspurgh while also working on a Master’s in Analytics at Georgia Tech.',
   },
   // More people...
 ]
