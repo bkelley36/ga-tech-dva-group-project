@@ -17,7 +17,7 @@ const people = [
     name: 'Cole',
     role: 'Pittsburgh, PA',
     image: ColeImage,
-    bio: 'Data Analyst at a healthcare start up during the week and adeventuring vagabond on the weekends. Former Peace Corps volunteer in Mozambique and graduate of Michigan State University who is currently setting up shop in Pittspurgh while also working on a Master’s in Analytics at Georgia Tech.',
+    bio: 'Data Analyst at a healthcare start up during the week and adventuring vagabond on the weekends. Former Peace Corps volunteer in Mozambique and graduate of Michigan State University who is currently setting up shop in Pittsburgh while also working through OMSA at Georgia Tech.',
   },
   // More people...
 ]
