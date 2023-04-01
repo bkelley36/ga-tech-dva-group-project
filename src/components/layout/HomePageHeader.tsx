@@ -15,7 +15,7 @@ const pages = [
     href: '#tool',
     actionText: 'Use the tool',
     description:
-      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+      'Get a summary of the METs offerings and find the optimal path to see everything on your agenda when visiting!',
     icon: MagnifyingGlassIcon,
   },
   {
@@ -23,7 +23,7 @@ const pages = [
     href: '/proposal',
     actionText: 'Read the Proposal',
     description:
-      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+      'Take a look at the proposal behind this project made for the Data Visualizations and Analytics class',
     icon: DocumentIcon,
   },
   {
@@ -31,7 +31,7 @@ const pages = [
     href: '/team',
     actionText: 'Meet the Team',
     description:
-      'Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui laoreet diam sed lacus, fames.',
+      'Meet and learn more about the Georgia Tech. students who created the project!',
     icon: UserGroupIcon,
   },
 ]
@@ -52,7 +52,7 @@ export default function HomePageHeader() {
             priority
           />
           <div
-            className='absolute inset-0 bg-gray-500 mix-blend-multiply'
+            className='absolute inset-0 bg-gray-600 mix-blend-multiply'
             aria-hidden='true'
           />
         </div>
@@ -61,21 +61,14 @@ export default function HomePageHeader() {
             MET Explorer
           </h1>
           <p className='mt-6 max-w-3xl text-xl text-gray-300'>
-            Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate
-            id malesuada non. Cras aliquet purus dui laoreet diam sed lacus,
-            fames. Dui, amet, nec sit pulvinar.
+            Welcome to the MET Explorer - A website to visualize The
+            Metropolitan Museum of Art's offerings and help plan your trip!
           </p>
         </div>
       </div>
 
       {/* Overlapping cards */}
-      <section
-        className='relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-32 lg:px-8'
-        aria-labelledby='contact-heading'
-      >
-        <h2 className='sr-only' id='contact-heading'>
-          Contact us
-        </h2>
+      <section className='relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-32 lg:px-8'>
         <div className='grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-y-0 lg:gap-x-8'>
           {pages.map((page) => (
             <div

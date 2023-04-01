@@ -55,7 +55,7 @@ export default function Footer() {
           ))}
         </div>
         <p className='mt-10 text-center text-xs leading-5 text-gray-500'>
-          OMSA Program Spring 2023 DVA Group Project
+          Georgia Tech. Analytics Masters Program: Spring 2023 DVA Group Project
         </p>
       </div>
     </footer>
