@@ -61,8 +61,9 @@ export default function HomePageHeader() {
             MET Explorer
           </h1>
           <p className='mt-6 max-w-3xl text-xl text-gray-300'>
-            Welcome to the MET Explorer - A website to visualize The
-            Metropolitan Museum of Art's offerings and help plan your trip!
+            Welcome to the Met! You can use this tool to optimize your Met visit
+            experience and explore the museum collection based on artwork
+            attributes that resonate with you.
           </p>
         </div>
       </div>
