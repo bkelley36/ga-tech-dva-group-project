@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import Layout from '@/components/layout/Layout'
+import Seo from '@/components/Seo'
 
 import brandonImage from '../../public/images/brandon.jpg'
 import ColeImage from '../../public/images/ColeAndBern.jpg'
@@ -25,6 +26,7 @@ const people = [
 export default function Team() {
   return (
     <Layout>
+      <Seo templateTitle='Team' />
       <div className='min-h-screen bg-white py-24 sm:py-32'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl sm:text-center'>

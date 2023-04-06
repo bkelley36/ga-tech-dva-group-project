@@ -4,10 +4,12 @@ import {
 } from '@heroicons/react/20/solid'
 
 import Layout from '@/components/layout/Layout'
+import Seo from '@/components/Seo'
 
 export default function Proposal() {
   return (
     <Layout>
+      <Seo templateTitle='Proposal' />
       <div className='bg-white py-32 px-6 lg:px-8'>
         <div className='mx-auto max-w-3xl text-base leading-7 text-gray-700'>
           <p className='text-base font-semibold leading-7 text-rose-600'>

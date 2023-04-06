@@ -57,10 +57,6 @@ const EmblaCarousel = () => {
   )
 }
 
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
-
 export default function HomePage() {
   return (
     <Layout>
@@ -68,7 +64,7 @@ export default function HomePage() {
       <HomePageHeader></HomePageHeader>
       <main id='tool'>
         <section className='bg-white'>
-          <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
+          <div className='layout relative flex min-h-screen flex-col items-center py-12 text-center'>
             <h1 className='mt-4'>MET Summary Analytics:</h1>
             <EmblaCarousel></EmblaCarousel>
           </div>
