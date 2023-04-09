@@ -1,4 +1,3 @@
-import { InformationCircleIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image'
 
 import Layout from '@/components/layout/Layout'
