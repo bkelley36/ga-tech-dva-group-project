@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Path Finding and Display</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width",initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <style></style>
+  </head>
+
+  <body>
+    <script src="https://unpkg.com/ngraph.path@1.3.1/dist/ngraph.path.min.js"></script>
+    <script src="https://unpkg.com/ngraph.graph@20.0.1/dist/ngraph.graph.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <script>
+      var pathToCsv = "2ndfloor_graph.csv"; // path to the csv
+
+      d3.dsv(",", pathToCsv, function (d) {
+        return {
+          source: d.source,
+          target: d.target,
+          weight: parseInt(d.weight),
+          coordinates_source: d.coordinates_source,
+          coordinates_target: d.coordinates_target,
+          exhibit_source: d.exhibit_source,
+          exhibit_target: d.exhibit_target,
+        };
+      }).then(function (data) {
+        var g = createGraph();
+        for (let i = 0; i < data.length; i++) {
+          g.addLink(parseInt(data[i].source), parseInt(data[i].target), {
+            weight: parseInt(data[i].weight),
+          });
+        }
+        //checking that the graph has been populated
+        /*g.forEachLink(function (link) {
+          console.dir(link);
+        });*/
+
+        let pathFinder = ngraphPath.aStar(g, {
+          // We tell our pathfinder what should it use as a distance function:
+          distance(fromNode, toNode, link) {
+            // We don't really care about from/to nodes in this case,
+            // as link.data has all needed information:
+            return link.data.weight;
+          },
+        });
+
+        //input beginning node and destination node
+        let path = pathFinder.find(1, 81);
+
+        //should return an array of nodes that routes from beginning node to destination node
+        console.log(path);
+      });
+    </script>
+  </body>
+</html>
