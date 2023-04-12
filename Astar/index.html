@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Path Finding and Display</title>
+    <style>
+        svg {
+            background-image: url("2nd floor.png");
+        }
+    </style>
+  </head>
+
+  <body>
+    <script type="text/javascript" src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+    <script>
+        const mapDims = [1468, 826]
+        const width = mapDims[0]
+        const height = mapDims[1]
+        //const pathToCsv = "2ndfloor_graph.csv"; // path to the csv
+        const pathToCsv = "test.csv"
+
+        let svg = d3
+            .select("body")
+            .append("svg")
+            .attr("id", "map")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("id", "container")
+
+        d3.dsv(",", pathToCsv, function (d) {
+            return {
+                source: parseInt(d.source),
+                target: parseInt(d.target),
+            };
+        }).then(function (data) {
+            let xScale = d3.scaleLinear()
+                .domain([0, mapDims[0]])
+                .range([0, width])
+
+            let yScale = d3.scaleLinear()
+                .domain([0, mapDims[1]])
+                .range([0, height])
+
+            const lineGenerator = d3.line()
+                .x(d => xScale(d.source))
+                .y(d => yScale(d.target))
+
+            svg.append("g")
+                .attr("id", "lines")
+            svg.selectAll("#lines")
+                .append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "black")
+                .attr("stroke-width", 4)
+                .attr("d", lineGenerator)
+
+            let circles = svg.append("g")
+                .attr("id", "circles")
+            circles.selectAll("#circles")
+                .data(data)
+                .enter().append("circle")
+                .attr("cx", d => xScale(d.source))
+                .attr("cy", d => yScale(d.target))
+                .attr("id", d => `#circle-${d.source}-${d.target}`)
+                .classed("node", true)
+                .attr("fill", "blue")
+                .attr("r", 5)
+        });
+    </script>
+  </body>
+</html>
