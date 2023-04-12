@@ -58,15 +58,22 @@
         });
 
         //since pathfinder takes in nodes for its arguments, but the end user wants to see art pieces (i.e. exhibit where that piece is found) this function converts exhibit ids to node ids for the pathfinder function
-        //returns the array of nodes for the optimal path
-        function get_path(start,end){
+        //it takes an array of exhibit ids, converts to nodes, runs through the pathfining alg, and appends the paths into the final_path array
+        function get_path(array){
+          final_path=[]
+          for (let i = 0; i < array.length; i++) {
+            if (i != array.length-1){
+              final_path.push.apply(final_path,pathFinder.find(exhibit_dict[array[i]],exhibit_dict[array[i+1]]))
+              }
+          }
 
-          //below document.writes is just for display - feel free to delete
-          document.write("optimal node path and coordinates from exhibit ",start," to exhibit ",end)
+           //below document.writes are just for display - feel free to delete
+          document.write("optimal node path and coordinates from exhibit ",array[0]," to exhibit ",array[array.length - 1],"<br>")
           document.write("<br> node__x,y coordinates")
 
-          return pathFinder.find(exhibit_dict[start],exhibit_dict[end])
-        }
+          return final_path }
+          
+        
         
         //now that you have the path of optimal nodes, can convert that path into an array of x,y pixel coordinates that we can use for visualization
         //returns an array of x,y coordinate tuples for each node on the optimal path
@@ -85,14 +92,15 @@
         //below document.write is just for display - feel free to delete
         
 
-        //Using the functions
-        //Use get_path(start exhibit id , end exhbit id) to get an optimal path through the museum, it will return an array of nodes
+        //Using the functions:
+        //Use get_path([exhibit id ranked by preference - in array format]) to get an optimal path through the museum, it will return an array of nodes
         //Use get_path_coords to convert that optimized path of nodes into individual x,y coordinates that can then be used to visualize that path
-        var best_path=get_path(600,819)
+        var best_path=get_path([925,763,635,763,405])
         var path_coordinates=get_path_coords(best_path)
 
         console.log("best path",best_path)
         console.log("xy path coordinates",path_coordinates)
+
 
       });
 
