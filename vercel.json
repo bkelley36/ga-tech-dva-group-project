@@ -1,4 +1,10 @@
 {
+  "functions": {
+    "api/*.py": {
+      "memory": 1024,
+      "maxDuration": 5
+    }
+  },
   "headers": [
     {
       "source": "/fonts/inter-var-latin.woff2",
