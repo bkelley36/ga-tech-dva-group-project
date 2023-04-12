@@ -15,6 +15,9 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <script>
+      //https://github.com/anvaka/ngraph#readme - for creating the graph
+      //https://github.com/anvaka/ngraph.path - for path finding
+
       //reading in the data from the 2ndfloor_graph.csv
       var pathToCsv = "2ndfloor_graph.csv"; // path to the csv
       d3.dsv(",", pathToCsv, function (d) {
@@ -44,13 +47,9 @@
 
           coord_dict[data[i].source]= data[i].coordinates_source;
         }
-
         //should now have usable graph data and dictionaries that we can reference for relating nodes to exhibits and displaying the data with x,y pixel coordinates on the 2nd floor.png image
 
-
         //functions to relate our data back and forth
-
-
         //pathfinder function from the library, left as is from the git repo - probably dont want to mess with this
         let pathFinder = ngraphPath.aStar(g, {
           distance(fromNode, toNode, link) {
@@ -61,6 +60,11 @@
         //since pathfinder takes in nodes for its arguments, but the end user wants to see art pieces (i.e. exhibit where that piece is found) this function converts exhibit ids to node ids for the pathfinder function
         //returns the array of nodes for the optimal path
         function get_path(start,end){
+
+          //below document.writes is just for display - feel free to delete
+          document.write("optimal node path and coordinates from exhibit ",start," to exhibit ",end)
+          document.write("<br> node__x,y coordinates")
+
           return pathFinder.find(exhibit_dict[start],exhibit_dict[end])
         }
         
@@ -79,16 +83,16 @@
         }
         
         //below document.write is just for display - feel free to delete
-        document.write("node__x,y coordinates")
+        
 
         //Using the functions
         //Use get_path(start exhibit id , end exhbit id) to get an optimal path through the museum, it will return an array of nodes
         //Use get_path_coords to convert that optimized path of nodes into individual x,y coordinates that can then be used to visualize that path
         var best_path=get_path(600,819)
-        console.log(best_path)
         var path_coordinates=get_path_coords(best_path)
-        console.log(path_coordinates)
 
+        console.log("best path",best_path)
+        console.log("xy path coordinates",path_coordinates)
 
       });
 
