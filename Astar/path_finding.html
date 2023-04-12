@@ -15,45 +15,83 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
     <script>
+      //reading in the data from the 2ndfloor_graph.csv
       var pathToCsv = "2ndfloor_graph.csv"; // path to the csv
-
       d3.dsv(",", pathToCsv, function (d) {
         return {
-          source: d.source,
-          target: d.target,
+          source: parseInt(d.source),
+          target: parseInt(d.target),
           weight: parseInt(d.weight),
           coordinates_source: d.coordinates_source,
           coordinates_target: d.coordinates_target,
-          exhibit_source: d.exhibit_source,
-          exhibit_target: d.exhibit_target,
-        };
+          exhibit_source: parseInt(d.exhibit_source),
+          exhibit_target: parseInt(d.exhibit_target),
+        }; //aggregating as "data" and then putting into a graph form that plays nice with the ngraph library
       }).then(function (data) {
+        // g stores the graph data
         var g = createGraph();
-        for (let i = 0; i < data.length; i++) {
-          g.addLink(parseInt(data[i].source), parseInt(data[i].target), {
-            weight: parseInt(data[i].weight),
-          });
-        }
-        //checking that the graph has been populated
-        /*g.forEachLink(function (link) {
-          console.dir(link);
-        });*/
+        // exhibit_dict stores the node:exhibit data
+        var exhibit_dict = {};
+        // coord_dict var stores the node:coordinates data
+        var coord_dict={}
 
+        //populatin the graph and the dicts
+        for (let i = 0; i < data.length; i++) {
+          g.addLink(data[i].source, data[i].target, {
+            weight: data[i].weight});
+
+          exhibit_dict[data[i].exhibit_source]=data[i].source
+
+          coord_dict[data[i].source]= data[i].coordinates_source;
+        }
+
+        //should now have usable graph data and dictionaries that we can reference for relating nodes to exhibits and displaying the data with x,y pixel coordinates on the 2nd floor.png image
+
+
+        //functions to relate our data back and forth
+
+
+        //pathfinder function from the library, left as is from the git repo - probably dont want to mess with this
         let pathFinder = ngraphPath.aStar(g, {
-          // We tell our pathfinder what should it use as a distance function:
           distance(fromNode, toNode, link) {
-            // We don't really care about from/to nodes in this case,
-            // as link.data has all needed information:
             return link.data.weight;
           },
         });
 
-        //input beginning node and destination node
-        let path = pathFinder.find(1, 81);
+        //since pathfinder takes in nodes for its arguments, but the end user wants to see art pieces (i.e. exhibit where that piece is found) this function converts exhibit ids to node ids for the pathfinder function
+        //returns the array of nodes for the optimal path
+        function get_path(start,end){
+          return pathFinder.find(exhibit_dict[start],exhibit_dict[end])
+        }
+        
+        //now that you have the path of optimal nodes, can convert that path into an array of x,y pixel coordinates that we can use for visualization
+        //returns an array of x,y coordinate tuples for each node on the optimal path
+        function get_path_coords(array) {
+          coord_path=[]
+          for (let i = 0; i < array.length; i++) {
+            var tuple=coord_dict[array[i].id].replace(/^\(|\)$/g, "").split(",")
+            coord_path.push([parseInt(tuple[0]),parseInt(tuple[1])])
+            
+            //below document.write is just for display - feel free to delete
+            document.write("<br>",array[i].id,"___",[parseInt(tuple[0]),parseInt(tuple[1])])
+          }
+          return coord_path
+        }
+        
+        //below document.write is just for display - feel free to delete
+        document.write("node__x,y coordinates")
 
-        //should return an array of nodes that routes from beginning node to destination node
-        console.log(path);
+        //Using the functions
+        //Use get_path(start exhibit id , end exhbit id) to get an optimal path through the museum, it will return an array of nodes
+        //Use get_path_coords to convert that optimized path of nodes into individual x,y coordinates that can then be used to visualize that path
+        var best_path=get_path(600,819)
+        console.log(best_path)
+        var path_coordinates=get_path_coords(best_path)
+        console.log(path_coordinates)
+
+
       });
+
     </script>
   </body>
 </html>
