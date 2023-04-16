@@ -125,3 +125,7 @@
   flex: 0 0 100%;
   min-width: 0;
 }
+
+svg#map {
+    background-image: url("/images/2nd floor.png");
+}
