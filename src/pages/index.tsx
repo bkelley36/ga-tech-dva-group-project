@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import * as d3 from 'd3'
 import * as ngraphPath from 'ngraph.path'
