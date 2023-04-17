@@ -5,6 +5,7 @@ import Seo from '@/components/Seo'
 
 import brandonImage from '../../public/images/brandon.jpg'
 import ColeImage from '../../public/images/ColeAndBern.jpg'
+import DanImage from '../../public/images/dan.jpg'
 
 const people = [
   {
@@ -19,6 +20,12 @@ const people = [
     role: 'Pittsburgh, PA',
     image: ColeImage,
     bio: 'Data Analyst at a healthcare start up during the week and adventuring vagabond on the weekends. Former Peace Corps volunteer in Mozambique and graduate of Michigan State University who is currently setting up shop in Pittsburgh while also working through OMSA at Georgia Tech.',
+  },
+  {
+    name: 'Dan',
+    role: 'New York, NY',
+    image: DanImage,
+    bio: 'Solutions Architect in the Cloud Services industry.  Graduated from St. Joseph\'s College with a B.S. Computer Science/Math.  Currently an OMSA student at Georgia Tech.',
   },
   // More people...
 ]
