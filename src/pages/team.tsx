@@ -5,6 +5,7 @@ import Seo from '@/components/Seo'
 
 import brandonImage from '../../public/images/brandon.jpg'
 import ColeImage from '../../public/images/ColeAndBern.jpg'
+import DanImage from '../../public/images/dan.jpg'
 
 const people = [
   {
