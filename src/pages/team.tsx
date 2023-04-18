@@ -6,6 +6,7 @@ import Seo from '@/components/Seo'
 import brandonImage from '../../public/images/brandon.jpg'
 import ColeImage from '../../public/images/ColeAndBern.jpg'
 import DanImage from '../../public/images/dan.jpg'
+import DanielImage from '../../public/images/daniel.jpg'
 
 const people = [
   {
@@ -26,6 +27,12 @@ const people = [
     role: 'New York, NY',
     image: DanImage,
     bio: 'Solutions Architect in the Cloud Services industry.  Graduated from St. Joseph\'s College with a B.S. Computer Science/Math.  Currently an OMSA student at Georgia Tech.',
+  },
+  {
+    name: 'Daniel',
+    role: 'Madison, WI',
+    image: DanielImage,
+    bio: 'Quality Control Analyst in a Microbiology laboratory. Graduated with a Bachelor of Science degree in Environmental Science from The University of Wisconsin – Madison. When not grinding through OMSA; enjoys biking, fishing, and hiking',
   },
   // More people...
 ]
