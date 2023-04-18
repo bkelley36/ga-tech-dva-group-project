@@ -14,6 +14,7 @@
     <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ngraph.path@1.3.1/dist/ngraph.path.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ngraph.graph@20.0.1/dist/ngraph.graph.min.js"></script>
+    <script type="text/javascript" src="multiselect-dropdown.js" ></script>
 
     <script>
         const mapDims = [1468, 826]
@@ -29,6 +30,14 @@
             .attr("height", height)
             .append("g")
             .attr("id", "container")
+        let controls_div = d3
+            .select("body")
+            .append("div")
+            .attr("id", "controls-div")
+        let tt = d3
+            .select('body')
+            .append('div')
+            .attr('id', 'tooltip')
 
         const xScale = d3.scaleLinear()
             .domain([0, mapDims[0]])
@@ -46,7 +55,6 @@
             }
         }
 
-        
         const graph = createGraph()
         const exhibit_dict = {};
         const coord_dict = {}
@@ -68,43 +76,65 @@
                 }
             }
             return final_path
-        }
 
+        }
         function get_path_coords(array) {
             const coord_path = []
             for (let i = 0; i < array.length; i++) {
                 let tuple=coord_dict[array[i].id].replace(/^\(|\)$/g, "").split(",")
-                coord_path.push([parseInt(tuple[0]),parseInt(tuple[1])])
-          }
-          return coord_path
+                coord_path.push([parseInt(tuple[0]),parseInt(tuple[1]),parseInt(array[i].id)])
+            }
+            return coord_path
         }
 
         function draw_route(path_coordinates) {
             svg.append("g")
-                    .attr("id", "lines")
-                svg.selectAll("#lines")
-                    .append("path")
-                    .datum(path_coordinates)
-                    .attr("fill", "none")
-                    .attr("stroke", "black")
-                    .attr("stroke-width", 4)
-                    .classed("edge", true)
-                    .attr("d", d3.line()
-                        .x(d => xScale(d[0]))
-                        .y(d => yScale(d[1]))
-                    )
+                .attr("id", "lines")
+            svg.selectAll("#lines")
+                .append("path")
+                .datum(path_coordinates)
+                .attr("fill", "none")
+                .attr("stroke", "black")
+                .attr("stroke-width", 4)
+                .classed("edge", true)
+                .attr("d", d3.line()
+                    .x(d => xScale(d[0]))
+                    .y(d => yScale(d[1]))
+                )
 
-                 let circles = svg.append("g")
-                    .attr("id", "circles")
-                circles.selectAll("#circles")
-                    .data(path_coordinates)
-                    .enter().append("circle")
-                    .attr("cx", d => xScale(d[0]))
-                    .attr("cy", d => yScale(d[1]))
-                    .attr("id", d => `#circle-${d[0]}-${d[1]}`)
-                    .classed("node", true)
+            let circles = svg.append("g")
+               .attr("id", "circles")
+            circles.selectAll("#circles")
+                .data(path_coordinates)
+                .enter().append("circle")
+                .attr("cx", d => xScale(d[0]))
+                .attr("cy", d => yScale(d[1]))
+                .attr("id", d => `#circle-${d[0]}-${d[1]}`)
+                .classed("node", true)
                 .attr("fill", "blue")
                 .attr("r", 5)
+                .on("mouseenter", function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .attr("r", 15)
+                })
+                .on("mouseover", d => {
+                    tt.transition()
+                        .duration(100)
+                        .style("opacity", 0.9)
+                    tt.html(`<b>Exhibit ID:</b> ${d[2]} <br />`)
+                })
+                .on("mouseleave mouseout", function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(300)
+                        .attr("r", 5)
+                    tt.transition()
+                        .duration(500)
+                        .style("opacity", 0.0)
+                    tt.html(``)
+                })
         }
 
         function remove_route() {
@@ -137,13 +167,12 @@
                 graph.addNode(data[i].source)
                 graph.addNode(data[i].target)
                 graph.addLink(data[i].source, data[i].target, {
-                    weight: data[i].weight
+                    weight: data[i].weight,
+                    data: "Source " + data[i].source + " --> Target " + data[i].target
                 });
                 exhibit_dict[data[i].exhibit_source] = data[i].source
                 coord_dict[data[i].source] = data[i].coordinates_source
             }
-
-            // removeDuplicateNodesAndEdges(graph);
 
             const nested_source_exhibits = d3.nest()
                 .key((d) => d.exhibit_source)
@@ -156,10 +185,6 @@
                 .entries(data)
                 .map((d) => d.key)
 
-            let controls_div = d3
-                .select("body")
-                .append("div")
-                .attr("id", "controls-div")
             let source_select = controls_div
                 .append("select")
                 .attr("id", "source-select")
@@ -170,8 +195,9 @@
                 .append("select")
                 .attr("id", "stops-select")
                 .attr("multiple", true)
-                .style("width", "50px")
-                    .style("height", "400px")
+                .attr("multiselect-search", true)
+                .attr("placeholder", "Additional Stops")
+                .style("width", "100px")
 
             source_select.selectAll("#source-select")
                 .data(nested_source_exhibits)
@@ -186,6 +212,7 @@
                         return d;
                 })
             source_select.property("value", 205)
+
             target_select.selectAll("#target-select")
                 .data(nested_target_exhibits)
                 .enter().append("option")
@@ -199,7 +226,8 @@
                         return d;
                 })
             target_select.property("value", 600)
-            stops_select.selectAll("#source-select")
+
+            stops_select.selectAll("#stops-select")
                 .data(nested_source_exhibits)
                 .enter().append("option")
                 .attr("value", function(d) {
@@ -211,6 +239,7 @@
                     if (d !== "NaN")
                         return d;
                 })
+            stops_select.property("value", 601)
 
             let submit_button = controls_div
                 .append("button")
