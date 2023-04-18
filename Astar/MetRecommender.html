@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Recommender</title>
+    
+</head>
+<body>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="jquery-csv.js"></script>
+    //reading in data from from gallery and artist file
+     <script>
+        var SecondFloor = $.csv.tooObjects('2ndFloorFinal')
+        //creating an array with just gallery number and data
+        const formatData = SecondFloor => {
+            let formatted = [];
+
+            for (const [key, labels] of Object.entries(SecondFloor)){
+                let tmpObj = {};
+                const desc = labels.map(l => {
+                    return l.data.toLowerCase();
+                });
+                tmpObj = {
+                    Gallery_Number: key,
+                    content: desc.join(" ")
+
+                };
+                formatted.push(tmpObj);
+
+            }
+            return formatted;
+        };
+        const createVectorsFromDocs = processedDocs => {
+          const tfidf = new TfIdf();
+
+          processedDocs.forEach(processedDocument => {
+            tfidf.addDocument(processedDocument.content);
+          });
+
+        const documentVectors = [];
+
+        for (let i = 0; i < processedDocs.length; i += 1) {
+            const processedDocument = processedDocs[i];
+            const obj = {};
+
+        const items = tfidf.listTerms(i);
+
+        for (let j = 0; j < items.length; j += 1) {
+            const item = items[j];
+            obj[item.term] = item.tfidf;
+        }
+
+        const documentVector = {
+            id: processedDocument.id,
+            vector: new Vector(obj)
+        };
+
+        documentVectors.push(documentVector);
+        }
+    }
+    const calcSimilarities = docVectors => {
+    // number of results that you want to return.
+    const MAX_SIMILAR = 20; 
+    // min cosine similarity score that should be returned.
+    const MIN_SCORE = 0.2;
+    const data = {};
+
+    for (let i = 0; i < docVectors.length; i += 1) {
+        const documentVector = docVectors[i];
+        const { id } = documentVector;
+
+        data[id] = [];
+        }
+
+    for (let i = 0; i < docVectors.length; i += 1) {
+        for (let j = 0; j < i; j += 1) {
+            const idi = docVectors[i].id;
+            const vi = docVectors[i].vector;
+            const idj = docVectors[j].id;
+            const vj = docVectors[j].vector;
+            const similarity = vi.getCosineSimilarity(vj);
+
+        if (similarity > MIN_SCORE) {
+            data[idi].push({ id: idj, score: similarity });
+            data[idj].push({ id: idi, score: similarity });
+        }
+    }
+  }
+
+    // finally sort the similar documents by descending order
+    Object.keys(data).forEach(id => {
+        data[id].sort((a, b) => b.score - a.score);
+
+        if (data[id].length > MAX_SIMILAR) {
+            data[id] = data[id].slice(0, MAX_SIMILAR);
+        }
+    });
+
+     return data;
+    }
+    //reducing vector values to scalar values
+    const getLength = () => {
+        let l = 0;
+
+        this.getComponents().forEach(k => {
+            l += this.vector[k] * this.vector[k];
+        });
+
+        return Math.sqrt(l);
+    }
+    //constructing cosine similarity
+    const getCosineSimilarity = (vector) => {
+    return this.getDotProduct(vector) / (this.getLength() * vector.getLength());
+    }
+
+    //getting reccomendations
+    const getSimilarDocuments = (id, trainedData) => {
+        let similarDocuments = trainedData[id];
+
+        if (similarDocuments === undefined) {
+            return [];
+        }
+
+        return similarDocuments;
+    };
+     </script>
+     
+
+
+</body>
+</html>
