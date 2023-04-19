@@ -100,7 +100,7 @@ function MultiselectDropdown(options){
     var e=document.createElement(tag);
     if(attrs!==undefined) Object.keys(attrs).forEach(k=>{
       if(k==='class') { Array.isArray(attrs[k]) ? attrs[k].forEach(o=>o!==''?e.classList.add(o):0) : (attrs[k]!==''?e.classList.add(attrs[k]):0)}
-      else if(k==='style'){
+      else if(k==='style'){  
         Object.keys(attrs[k]).forEach(ks=>{
           e.style[ks]=attrs[k][ks];
         });
@@ -111,9 +111,9 @@ function MultiselectDropdown(options){
     return e;
   }
 
-
+  
   document.querySelectorAll("select[multiple]").forEach((el,k)=>{
-
+    
     var div=newEl('div',{class:'multiselect-dropdown',style:{width:config.style?.width??el.clientWidth+'px',padding:config.style?.padding??''}});
     el.style.display='none';
     el.parentNode.insertBefore(div,el.nextSibling);
@@ -126,21 +126,21 @@ function MultiselectDropdown(options){
 
     el.loadOptions=()=>{
       list.innerHTML='';
-
+      
       if(el.attributes['multiselect-select-all']?.value=='true'){
         var op=newEl('div',{class:'multiselect-dropdown-all-selector'})
         var ic=newEl('input',{type:'checkbox'});
         op.appendChild(ic);
         op.appendChild(newEl('label',{text:config.txtAll}));
-
+  
         op.addEventListener('click',()=>{
           op.classList.toggle('checked');
           op.querySelector("input").checked=!op.querySelector("input").checked;
-
+          
           var ch=op.querySelector("input").checked;
           list.querySelectorAll(":scope > div:not(.multiselect-dropdown-all-selector)")
             .forEach(i=>{if(i.style.display!=='none'){i.querySelector("input").checked=ch; i.optEl.selected=ch}});
-
+  
           el.dispatchEvent(new Event('change'));
         });
         ic.addEventListener('click',(ev)=>{
@@ -152,7 +152,7 @@ function MultiselectDropdown(options){
           if(ic.checked && existsNotSelected) ic.checked=false;
           else if(ic.checked==false && existsNotSelected===undefined) ic.checked=true;
         });
-
+  
         list.appendChild(op);
       }
 
@@ -180,7 +180,7 @@ function MultiselectDropdown(options){
         div.querySelectorAll('span.optext, span.placeholder').forEach(t=>div.removeChild(t));
         var sels=Array.from(el.selectedOptions);
         if(sels.length>(el.attributes['multiselect-max-items']?.value??5)){
-          div.appendChild(newEl('span',{class:['optext','maxselected'],text:sels.length+' '+config.txtSelected}));
+          div.appendChild(newEl('span',{class:['optext','maxselected'],text:sels.length+' '+config.txtSelected}));          
         }
         else{
           sels.map(x=>{
@@ -196,7 +196,7 @@ function MultiselectDropdown(options){
       div.refresh();
     }
     el.loadOptions();
-
+    
     search.addEventListener('input',()=>{
       list.querySelectorAll(":scope div:not(.multiselect-dropdown-all-selector)").forEach(d=>{
         var txt=d.querySelector("label").innerText.toUpperCase();
@@ -209,13 +209,13 @@ function MultiselectDropdown(options){
       search.focus();
       search.select();
     });
-
+    
     document.addEventListener('click', function(event) {
       if (!div.contains(event.target)) {
         listWrap.style.display='none';
         div.refresh();
       }
-    });
+    });    
   });
 }
 
