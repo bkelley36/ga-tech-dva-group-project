@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <title>Recommendation</title>
+    <style></style>
+  </head>
+  <body>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <label
+      >Artist or Artwork Search:
+      <input
+        type="text"
+        id="user-input"
+        list="rec_artists"
+        style="width: 350px"
+      />
+    </label>
+    <datalist id="rec_artists"></datalist>
+    <button id="rec_button" type="button">Provide Recommendation</button>
+    <p>Recommended Art Pieces (Title-Artist-Description-Exhibit Number):</p>
+    <ul id="rec_out_list"></ul>
+    <script>
+      //given artist name or artwork title - returns matches
+      //called with entry into the "Artist or Artwork Search Field"
+      function match_artist(data, artistname) {
+        //filtering the dataset for matches
+        var matches = data.filter(
+          (piece) =>
+            piece.artist.toLowerCase().includes(artistname.toLowerCase()) ||
+            piece.title.toLowerCase().includes(artistname.toLowerCase())
+        )
+        //appending matches to an array that is returned
+        const title_exhibit = []
+        matches.forEach((i) =>
+          title_exhibit.push({
+            artist: i['artist'],
+            title: i['title'],
+            exhibit_number: i['exhibit_number'],
+            tags: i['tags'],
+          })
+        )
+        return title_exhibit
+      }
+
+      //given artist name and artwork title - returns similar pieces using the "tags" field
+      //called when a selection is made from the
+      function recommend(data, artistname, title) {
+        //filter for the single piece of art that matches the input
+        var matches = data.filter(
+          (piece) => piece.artist === artistname && piece.title === title
+        )
+        //pulling the description from that single art piece
+        var desc = matches[0]['tags'].split('|')
+
+        //if the tags field has more than one desriptor: get all permutations (selected in 2s) of the descrption
+        //ex: ['Men|Women|Drinking|Musicians'] -> ['Men|Women', 'Men|Drinking', 'Men|Musicians', 'Women|Drinking', 'Women|Musicians', 'Drinking|Musicians']
+        //if the tags field has only one descriptor: just pull that one
+        //append permutations of descriptors or single descriptor to the result variable
+        if (desc.length > 1) {
+          var result = desc.flatMap((v, i) =>
+            desc.slice(i + 1).map((w) => v + '|' + w)
+          )
+        } else {
+          var result = desc
+        }
+        //for each value in the result var: find other pieces that have tags similar to the input art piece
+        var recommended = []
+        for (let i = 0; i < result.length; i++) {
+          //there are many pieces with Men and Women Descriptors - we wont select for that combo alone
+          if (result[i] != 'Men|Women' && result[i] != 'Women|Men') {
+            recommended.push(
+              data.filter(
+                (piece) =>
+                  piece.tags.includes(result[i]) && piece.title != title
+              )
+            )
+          }
+        }
+        //recommended is likely an aray of arrays of different lenghts at this point - here were flattening it to a single array of multpile art piece objects
+        const recommended_merged = recommended.flat(1)
+        return recommended_merged
+      }
+
+      //reading in the data
+      var pathToCsv = 'recommendation_set.csv'
+      d3.dsv(',', pathToCsv, function (d) {
+        return {
+          is_highlight: d.is_highlight,
+          exhibit_number: parseInt(d.gallery_number),
+          title: d.title,
+          department: d.department,
+          tags: d.tags,
+          object_type: d.object_type,
+          culture: d.culture,
+          artist: d.artist,
+          medium: d.medium,
+        }
+      }).then(function (data) {
+        data.forEach((d) => {
+          d.tags_list = d['tags'].split('|')
+        })
+
+        //running functions on input - kind of a mess, hopefully plays nice with Index.tsx
+
+        //For Artist or Artwork Search field
+        //on input into the text field
+        d3.select('#user-input').on('input', function () {
+          //clear the returned artists/artpieces each time there is input - else we'll have a massive list of repeats
+          document.getElementById('rec_artists').innerHTML = ''
+          //pulling the value from the text field as its typed
+          var content = d3.select(this).property('value')
+          //using that value to run match_artist
+          var out_matches = match_artist(data, content)
+          //for each match in out_matches (matching artist name or artpiece title)
+          out_matches.forEach(function (piece) {
+            //selecting the artist_list
+            var artist_list = document.getElementById('rec_artists')
+            //creating options to append to artist_list
+            var option = document.createElement('option')
+            option.value = [
+              piece['title'],
+              piece['artist'],
+              piece['exhibit_number'],
+            ].join(' - ')
+            //appending to the artist list
+            artist_list.append(option)
+          })
+        })
+
+        //List of recommended artwork
+        //after searching via "Artist or Artwork Search", making a selection, and clicking button
+        document
+          .getElementById('rec_button')
+          .addEventListener('click', function () {
+            //clear previous recommendations if already run
+            document.getElementById('rec_out_list').innerHTML = ''
+            //getting the selected value from "Artist or Artwork Search"
+            let content = document
+              .getElementById('user-input')
+              .value.split(' - ')
+            //getting the recommendation list
+            let list = document.getElementById('rec_out_list')
+            //running recommendation on the selected value from "Artist or Artwork Search"
+            var recommendation = recommend(data, content[1], content[0])
+            //selecting 5 recommendations randomly from the returned recommendation - dont want too many
+            var rand_5 = recommendation
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 5)
+            //print to page each of the 5 recommendations
+            rand_5.forEach(function (i) {
+              let li = document.createElement('li')
+              li.innerText = [
+                i['title'],
+                i['artist'],
+                i['tags_list'],
+                i['exhibit_number'],
+              ].join('   -   ')
+              list.appendChild(li)
+            })
+          })
+      })
+    </script>
+  </body>
+</html>
