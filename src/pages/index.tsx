@@ -11,6 +11,7 @@ import Layout from '@/components/layout/Layout'
 import Seo from '@/components/Seo'
 
 import exampleImage from '../../public/images/example.png'
+import multiselect from '../../public/scripts/multiselect-dropdown.js'
 
 const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
@@ -153,6 +154,22 @@ const PlanningTool = () => {
                     .classed("node", true)
                 .attr("fill", "blue")
                 .attr("r", 5)
+                .on("mouseenter", function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(100)
+                        .attr("r", 15)
+                })
+                .on("mouseleave mouseout", function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(300)
+                        .attr("r", 5)
+                    tt.transition()
+                        .duration(500)
+                        .style("opacity", 0.0)
+                    tt.html(``)
+                })
         }
 
         function remove_route() {
@@ -208,6 +225,10 @@ const PlanningTool = () => {
                 .select("span#map")
                 .append("div")
                 .attr("id", "controls-div")
+            let tt = d3
+                .select('body')
+                .append('div')
+                .attr('id', 'tooltip')
             let source_select = controls_div
                 .append("select")
                 .attr("id", "source-select")
@@ -218,6 +239,9 @@ const PlanningTool = () => {
                 .append("select")
                 .attr("id", "stops-select")
                 .attr("multiple", true)
+                .attr("multiselect-search", true)
+                .attr("placeholder", "Additional Stops")
+                .style("width", "75px")
 
 
             source_select.selectAll("#source-select")
@@ -246,7 +270,7 @@ const PlanningTool = () => {
                         return d;
                 })
             target_select.property("value", 600)
-            stops_select.selectAll("#source-select")
+            stops_select.selectAll("#stops-select")
                 .data(nested_source_exhibits)
                 .enter().append("option")
                 .attr("value", function(d) {
@@ -258,6 +282,7 @@ const PlanningTool = () => {
                     if (d !== "NaN")
                         return d;
                 })
+            stops_select.property("value", 601)
 
             let submit_button = controls_div
                 .append("button")
