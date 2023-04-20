@@ -9,6 +9,13 @@ import DanImage from '../../public/images/dan.jpg'
 import DanielImage from '../../public/images/daniel.jpg'
 
 const people = [
+    {
+    name: 'Alex',
+    role: 'Madison, WI',
+    image: AlexImage,
+    bio: 'Analytics Consultant for a major hospital. Graduated from Luther College with a degree in Mathematics and Secondary Education. Currently pursing a Master’s in Analytics at Georgia Tech. Enjoys travel, gaming, and spending time outdoors.',
+  },
+  
   {
     name: 'Brandon',
     role: 'Cleveland, OH',
@@ -34,7 +41,13 @@ const people = [
     image: DanielImage,
     bio: 'Quality Control Analyst in a Microbiology laboratory. Graduated with a Bachelor of Science degree in Environmental Science from The University of Wisconsin – Madison. When not grinding through OMSA; enjoys biking, fishing, and hiking',
   },
-  // More people...
+    
+  {
+    name: 'Parama',
+    role: 'Kansas City, Kansas',
+    image: ParamaImage,
+    bio: 'Senior Business Intelligence Analyst in the retail sector. Certified Scrum Master, Mechanical Engineering graduate and MBA. Currently pursuing a Master’s in Analytics from Georgia Tech. Enjoys rock climbing, hiking, and reading in spare time.',
+  },
 ]
 
 export default function Team() {
