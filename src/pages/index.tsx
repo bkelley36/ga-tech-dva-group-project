@@ -16,7 +16,6 @@ import dataExploration3 from '../../public/images/Data Exploration-3.png'
 import dataExploration4 from '../../public/images/Data Exploration-4.png'
 import dataExploration5 from '../../public/images/Data Exploration-5.png'
 
-import multiselect from '../../public/scripts/multiselect-dropdown.js'
 
 const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
@@ -74,7 +73,6 @@ const EmblaCarousel = () => {
 const PlanningTool = () => {
 
   useEffect(() => {
-    console.log("test")
   
         const mapDims = [1468, 826]
         const width = mapDims[0]
@@ -89,24 +87,50 @@ const PlanningTool = () => {
             .attr("height", height)
             .append("g")
             .attr("id", "container")
+            
         
+        let controlsHTML = 
+        `
+        <div class="flex justify-center">
+        <div id="source_select_div" class="px-4">
+        <span class="pr-4 text-lg"><b>Starting Location:</b></span>
+        </div>
+        <br/>
+        <div id="target_select_div" class="px-4">
+        <span class="pr-4 text-lg"><b>Ending Location:</b></span>
+        </div>
+        </div>
+        <div id="stops_select_div" class="pt-8">
+        <span class="pr-4 text-lg"><b>Add stops (shift click to select multiple)</b></span>
+
+        
+        </div>
+
+        <div id="routing_button_div" class="pt-8"></div>
+        `
         let controls_div = d3
             .select("span#map")
             .append("div")
+            .attr("class", "py-12")
             .attr("id", "controls-div")
+            .html(controlsHTML)
+            
         let source_select = controls_div
+            .select("div#source_select_div")
             .append("select")
             .attr("id", "source-select")
         let target_select = controls_div
+            .select("div#target_select_div")
             .append("select")
             .attr("id", "target-select")
+        
         let stops_select = controls_div
+            .select("div#stops_select_div")
             .append("select")
             .attr("id", "stops-select")
             .attr("multiple", true)
             .attr("multiselect-search", true)
-            .attr("placeholder", "Additional Stops")
-            .style("width", "75px")        
+            .attr("placeholder", "Additional Stops")     
         let tt = d3
             .select("span#map")
             .append('div')
@@ -243,16 +267,24 @@ const PlanningTool = () => {
 
             // removeDuplicateNodesAndEdges(graph);
 
-            const nested_source_exhibits = d3.nest()
+            var nested_source_exhibits = d3.nest()
                 .key((d) => d.exhibit_source)
                 .rollup((group) => group[0])
                 .entries(data)
                 .map((d) => d.key)
-            const nested_target_exhibits = d3.nest()
+
+            var nested_target_exhibits = d3.nest()
                 .key((d) => d.exhibit_target)
                 .rollup((group) => group[0])
                 .entries(data)
                 .map((d) => d.key)
+
+            nested_source_exhibits = nested_source_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
+            
+            nested_target_exhibits = nested_target_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
+
+            let multiSelectOptions = nested_source_exhibits
+            console.log(nested_target_exhibits)
 
             source_select.selectAll("#source-select")
                 .data(nested_source_exhibits)
@@ -294,10 +326,14 @@ const PlanningTool = () => {
                 })
             stops_select.property("value", 601)
 
+            let routing_class = "rounded-md bg-rose-600 px-8 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
             let submit_button = controls_div
+                .select("div#routing_button_div")
                 .append("button")
                 .attr("id", "submit-button")
-                .text("Re-Route")
+                .attr("class", routing_class)
+                .text("Route")
+
 
             let best_path = get_path([source_select.property("value"), target_select.property("value")])
             let path_coordinates = get_path_coords(best_path)
