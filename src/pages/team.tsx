@@ -78,6 +78,7 @@ export default function Team() {
                   width={208}
                   height={260}
                   alt={`${person.name} image`}
+                  priority
                 />
                 <div className='flex-auto'>
                   <h3 className='text-lg font-semibold leading-8 tracking-tight text-gray-900'>
