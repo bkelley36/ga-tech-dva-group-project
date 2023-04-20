@@ -3,10 +3,12 @@ import Image from 'next/image'
 import Layout from '@/components/layout/Layout'
 import Seo from '@/components/Seo'
 
+import AlexImage from '../../public/images/Alex.jpg'
 import brandonImage from '../../public/images/brandon.jpg'
 import ColeImage from '../../public/images/ColeAndBern.jpg'
 import DanImage from '../../public/images/dan.jpg'
 import DanielImage from '../../public/images/daniel.jpg'
+import ParamaImage from '../../public/images/Parama.jpg'
 
 const people = [
     {
@@ -39,9 +41,8 @@ const people = [
     name: 'Daniel',
     role: 'Madison, WI',
     image: DanielImage,
-    bio: 'Quality Control Analyst in a Microbiology laboratory. Graduated with a Bachelor of Science degree in Environmental Science from The University of Wisconsin – Madison. When not grinding through OMSA; enjoys biking, fishing, and hiking',
+    bio: 'Quality Control Analyst in a Microbiology laboratory. Graduated with a Bachelor of Science degree in Environmental Science from The University of Wisconsin – Madison. When not grinding through OMSA; enjoys biking, fishing, and hiking.',
   },
-    
   {
     name: 'Parama',
     role: 'Kansas City, Kansas',
