@@ -10,7 +10,12 @@ import HomePageHeader from '@/components/layout/HomePageHeader'
 import Layout from '@/components/layout/Layout'
 import Seo from '@/components/Seo'
 
-import exampleImage from '../../public/images/example.png'
+import dataExploration1 from '../../public/images/Data Exploration-1.png'
+import dataExploration2 from '../../public/images/Data Exploration-2.png'
+import dataExploration3 from '../../public/images/Data Exploration-3.png'
+import dataExploration4 from '../../public/images/Data Exploration-4.png'
+import dataExploration5 from '../../public/images/Data Exploration-5.png'
+
 import multiselect from '../../public/scripts/multiselect-dropdown.js'
 
 const EmblaCarousel = () => {
@@ -28,13 +33,19 @@ const EmblaCarousel = () => {
     <div className='embla' ref={emblaRef}>
       <div className='embla__container'>
         <div className='embla__slide'>
-          <Image src={exampleImage} width={1600} height={900} alt='example' />
+          <Image src={dataExploration1} width={1600} height={900} alt='example' />
         </div>
         <div className='embla__slide'>
-          <Image src={exampleImage} width={1600} height={900} alt='example' />
+          <Image src={dataExploration2} width={1600} height={900} alt='example' />
         </div>
         <div className='embla__slide'>
-          <Image src={exampleImage} width={1600} height={900} alt='example' />
+          <Image src={dataExploration3} width={1600} height={900} alt='example' />
+        </div>
+        <div className='embla__slide'>
+          <Image src={dataExploration4} width={1600} height={900} alt='example' />
+        </div>
+        <div className='embla__slide'>
+          <Image src={dataExploration5} width={1600} height={900} alt='example' />
         </div>
       </div>
       <span className='isolate inline-flex rounded-md shadow-sm'>
