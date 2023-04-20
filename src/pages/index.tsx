@@ -33,19 +33,19 @@ const EmblaCarousel = () => {
     <div className='embla' ref={emblaRef}>
       <div className='embla__container'>
         <div className='embla__slide'>
-          <Image src={dataExploration1} width={1600} height={900} alt='example' />
+          <Image src={dataExploration1} width={1600} height={900} alt='Data Exploration 1' />
         </div>
         <div className='embla__slide'>
-          <Image src={dataExploration2} width={1600} height={900} alt='example' />
+          <Image src={dataExploration2} width={1600} height={900} alt='Data Exploration 2' />
         </div>
         <div className='embla__slide'>
-          <Image src={dataExploration3} width={1600} height={900} alt='example' />
+          <Image src={dataExploration3} width={1600} height={900} alt='Data Exploration 3' />
         </div>
         <div className='embla__slide'>
-          <Image src={dataExploration4} width={1600} height={900} alt='example' />
+          <Image src={dataExploration4} width={1600} height={900} alt='Data Exploration 4' />
         </div>
         <div className='embla__slide'>
-          <Image src={dataExploration5} width={1600} height={900} alt='example' />
+          <Image src={dataExploration5} width={1600} height={900} alt='Data Exploration 5' />
         </div>
       </div>
       <span className='isolate inline-flex rounded-md shadow-sm'>
