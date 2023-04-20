@@ -13,39 +13,39 @@ import ParamaImage from '../../public/images/Parama.jpg'
 const people = [
     {
     name: 'Alex',
-    role: 'Madison, WI',
+    location: 'Madison, WI',
     image: AlexImage,
     bio: 'Analytics Consultant for a major hospital. Graduated from Luther College with a degree in Mathematics and Secondary Education. Currently pursing a Master’s in Analytics at Georgia Tech. Enjoys travel, gaming, and spending time outdoors.',
   },
   
   {
     name: 'Brandon',
-    role: 'Cleveland, OH',
+    location: 'Cleveland, OH',
     image: brandonImage,
     bio: 'Remote Software Engineer in the Insurance Industry with web and mobile development experience. Graduated from Cleveland State University’s college of Engineering with a Bachelor’s of Science in Computer Science. Currently pursing a Master’s in Analytics at Georgia Tech. ',
   },
 
   {
     name: 'Cole',
-    role: 'Pittsburgh, PA',
+    location: 'Pittsburgh, PA',
     image: ColeImage,
     bio: 'Data Analyst at a healthcare start up during the week and adventuring vagabond on the weekends. Former Peace Corps volunteer in Mozambique and graduate of Michigan State University who is currently setting up shop in Pittsburgh while also working through OMSA at Georgia Tech.',
   },
   {
     name: 'Dan',
-    role: 'New York, NY',
+    location: 'New York, NY',
     image: DanImage,
     bio: 'Solutions Architect in the Cloud Services industry.  Graduated from St. Joseph\'s College with a B.S. Computer Science/Math.  Currently an OMSA student at Georgia Tech.',
   },
   {
     name: 'Daniel',
-    role: 'Madison, WI',
+    location: 'Madison, WI',
     image: DanielImage,
     bio: 'Quality Control Analyst in a Microbiology laboratory. Graduated with a Bachelor of Science degree in Environmental Science from The University of Wisconsin – Madison. When not grinding through OMSA; enjoys biking, fishing, and hiking.',
   },
   {
     name: 'Parama',
-    role: 'Kansas City, Kansas',
+    location: 'Kansas City, Kansas',
     image: ParamaImage,
     bio: 'Senior Business Intelligence Analyst in the retail sector. Certified Scrum Master, Mechanical Engineering graduate and MBA. Currently pursuing a Master’s in Analytics from Georgia Tech. Enjoys rock climbing, hiking, and reading in spare time.',
   },
@@ -67,7 +67,7 @@ export default function Team() {
             </p>
           </div>
           <ul
-            role='list'
+            location='list'
             className='mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-6 gap-y-20 sm:grid-cols-2 lg:max-w-4xl lg:gap-x-8 xl:max-w-none'
           >
             {people.map((person) => (
@@ -84,7 +84,7 @@ export default function Team() {
                     {person.name}
                   </h3>
                   <p className='text-base leading-7 text-gray-600'>
-                    {person.role}
+                    {person.location}
                   </p>
                   <p className='mt-6 text-base leading-7 text-gray-600'>
                     {person.bio}
