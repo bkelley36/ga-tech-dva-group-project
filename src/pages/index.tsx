@@ -30,7 +30,7 @@ const EmblaCarousel = () => {
   }, [emblaApi])
 
   return (
-    <div className='embla' ref={emblaRef}>
+    <div className='embla pb-16' ref={emblaRef}>
       <div className='embla__container'>
         <div className='embla__slide'>
           <Image src={dataExploration1} width={1600} height={900} alt='Data Exploration 1' priority />
@@ -48,7 +48,7 @@ const EmblaCarousel = () => {
           <Image src={dataExploration5} width={1600} height={900} alt='Data Exploration 5' priority/>
         </div>
       </div>
-      <span className='isolate inline-flex rounded-md shadow-sm'>
+      <span className='isolate inline-flex rounded-md shadow-sm pt-4'>
         <button
           type='button'
           onClick={scrollPrev}
@@ -341,9 +341,10 @@ export default function HomePage() {
       <HomePageHeader></HomePageHeader>
       <main id='tool'>
         <section className='bg-white'>
-          <div className='layout relative flex min-h-screen flex-col items-center py-12 text-center'>
-            <h1 className='mt-4'>MET Summary Analytics:</h1>
+          <div className='layout relative flex min-h-screen flex-col items-center text-center'>
+            <h1 className='my-8'>MET Summary Analytics:</h1>
             <EmblaCarousel></EmblaCarousel>
+            <h1 className='my-8'>MET Visit Routing Tool:</h1>
             <PlanningTool></PlanningTool>
           </div>
         </section>
