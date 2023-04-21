@@ -274,16 +274,20 @@ const PlanningTool = () => {
                 .rollup((group) => group[0])
                 .entries(data)
                 .map((d) => +d.key)
+                .sort((a, b) => a - b)
+            nested_source_exhibits.shift()
 
             var nested_target_exhibits = d3.nest()
                 .key((d) => d.exhibit_target)
                 .rollup((group) => group[0])
                 .entries(data)
                 .map((d) => +d.key)
+                .sort((a, b) => a - b)
+            nested_target_exhibits.shift()
 
-            nested_source_exhibits = nested_source_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
+            //nested_source_exhibits = nested_source_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
             
-            nested_target_exhibits = nested_target_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
+            //nested_target_exhibits = nested_target_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
 
             let multiSelectOptions = nested_source_exhibits
             console.log(nested_target_exhibits)
