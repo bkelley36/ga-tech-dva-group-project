@@ -115,30 +115,16 @@ const PlanningTool = () => {
             .attr("id", "controls-div")
             .html(controlsHTML)
             
-        controls_div
-            .append("text")
-            .attr("id", "source_select_label")
-            .text("Starting Point: ")
         let source_select = controls_div
             .select("div#source_select_div")
             .append("select")
             .attr("id", "source-select")
-        controls_div.append("p")
 
-        controls_div
-            .append("text")
-            .attr("id", "target_select_label")
-            .text("Target Point: ")
         let target_select = controls_div
             .select("div#target_select_div")
             .append("select")
             .attr("id", "target-select")
-        controls_div.append("p")
 
-        controls_div
-            .append("text")
-            .attr("id", "stops_select_label")
-            .text("Subsequent Stops: ")
         let stops_select = controls_div
             .select("div#stops_select_div")
             .append("select")
@@ -146,8 +132,7 @@ const PlanningTool = () => {
             .attr("multiple", true)
             .attr("multiselect-search", true)
             .attr("placeholder", "Additional Stops")     
-        controls_div.append("p")
-    
+        
         let tt = d3
             .select("span#map")
             .append('div')
@@ -289,20 +274,16 @@ const PlanningTool = () => {
                 .rollup((group) => group[0])
                 .entries(data)
                 .map((d) => +d.key)
-                .sort((a, b) => a - b)
-            nested_source_exhibits.shift()
 
             var nested_target_exhibits = d3.nest()
                 .key((d) => d.exhibit_target)
                 .rollup((group) => group[0])
                 .entries(data)
                 .map((d) => +d.key)
-                .sort((a, b) => a - b)
-            nested_target_exhibits.shift()
 
-            //nested_source_exhibits = nested_source_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
+            nested_source_exhibits = nested_source_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
             
-            //nested_target_exhibits = nested_target_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
+            nested_target_exhibits = nested_target_exhibits.filter(e => e != "NaN").sort(function(a, b){return a-b})
 
             let multiSelectOptions = nested_source_exhibits
             console.log(nested_target_exhibits)
