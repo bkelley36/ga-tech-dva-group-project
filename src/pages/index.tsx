@@ -414,12 +414,11 @@ const Recommender = () => {
         } else {
             desc = []
         }
-
         //if the tags field has more than one desriptor: get all permutations (selected in 2s) of the descrption
         //ex: ['Men|Women|Drinking|Musicians'] -> ['Men|Women', 'Men|Drinking', 'Men|Musicians', 'Women|Drinking', 'Women|Musicians', 'Drinking|Musicians']
         //if the tags field has only one descriptor: just pull that one
         //append permutations of descriptors or single descriptor to the result variable
-        if (desc.length > 1) {
+        if (desc.length >= 2) { 
           var result = desc.flatMap((v, i) =>
             desc.slice(i + 1).map((w) => v + '|' + w)
           )
@@ -431,16 +430,30 @@ const Recommender = () => {
         for (let i = 0; i < result.length; i++) {
           //there are many pieces with Men and Women Descriptors - we wont select for that combo alone
           if (result[i] != 'Men|Women' && result[i] != 'Women|Men') {
+            var two_desc = result[i].split('|')
             recommended.push(
               data.filter(
                 (piece) =>
-                  piece.tags.includes(result[i]) && piece.title != title
+                  piece.tags.includes(two_desc[0]) && piece.tags.includes(two_desc[1]) && piece.title != title
               )
             )
           }
         }
+        var recommended = recommended.flat(1)
+        if (recommended.length == 0){
+          for (let i = 0; i < desc.length; i++) {
+          //there are many pieces with Men and Women Descriptors - we wont select for that combo alone
+          recommended.push(
+            data.filter(
+              (piece) =>
+                piece.tags.includes(desc[i]) && piece.title != title
+              )
+            )
+        }
+        }
+        var  recommended_merged = recommended.flat(1)
         //recommended is likely an aray of arrays of different lenghts at this point - here were flattening it to a single array of multpile art piece objects
-        const recommended_merged = recommended.flat(1)
+        
         return recommended_merged
       }
 
