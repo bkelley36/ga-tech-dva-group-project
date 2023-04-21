@@ -576,13 +576,13 @@ export default function HomePage() {
     <Layout>
       <Seo templateTitle='Home' />
       <HomePageHeader></HomePageHeader>
-      <main id='tool'>
+      <main>
         <section className='bg-white'>
           <div className='layout relative flex min-h-screen flex-col items-center text-center'>
             <h1 className='my-8'>MET Summary Analytics:</h1>
             <EmblaCarousel></EmblaCarousel>
             <hr className="h-px w-full my-8 bg-gray-200 border-0 dark:bg-gray-200"/>
-            <h1 className='my-8'>MET Visit Routing Tool:</h1>
+            <h1 className='my-8' id='tool'>MET Visit Routing Tool:</h1>
             <PlanningTool></PlanningTool>
             <hr className="h-px w-full my-8 bg-gray-200 border-0 dark:bg-gray-200"/>
             <h1 className='my-8'>MET Recommender:</h1>
