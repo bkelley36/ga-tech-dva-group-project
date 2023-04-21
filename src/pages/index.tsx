@@ -119,11 +119,12 @@ const PlanningTool = () => {
             .select("div#source_select_div")
             .append("select")
             .attr("id", "source-select")
+
         let target_select = controls_div
             .select("div#target_select_div")
             .append("select")
             .attr("id", "target-select")
-        
+
         let stops_select = controls_div
             .select("div#stops_select_div")
             .append("select")
@@ -131,6 +132,7 @@ const PlanningTool = () => {
             .attr("multiple", true)
             .attr("multiselect-search", true)
             .attr("placeholder", "Additional Stops")     
+        
         let tt = d3
             .select("span#map")
             .append('div')
