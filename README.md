@@ -18,7 +18,7 @@ Like mentioned above the website is live and most easily can be seen by visiting
 here: [https://ga-tech-dva-group-project.vercel.app/](https://ga-tech-dva-group-project.vercel.app/)  
 but local development/testing is also possible by following the next steps
 
-## Execution
+## Execution from the website
 Once on the website, the user should be greeted by a large map of the second floor of the metropolitan art museum. At the bottom of the map there is an input field for typing an artist or art piece of interest. A list will auto populate as the user types. Upon making a selection from this list, the user may click the "Provide Recommendation” button. Thereafter, a list of 5 or less recommended items will populate below the input field. If the recommendation button is clicked more than once, it may provide more recommendations from the user search depending on how many pieces were matched by the recommender. 
 
 At this time, there is no communication between the recommendation tool and the visualization tool. The user must make note of the exhibits returned in their search and the associated recommendation and use those values as input into the routing tool. Linking these two is a future improvement that we intend to implement. To use the pathfinding tool, select the exhibit you would like to start from and the exhibit you would like to go to. Optionally select additional exhibits you would like to go to next. Click the button to generate the path on the map you should follow. The path is generated using the A-star pathfinding heuristic.
